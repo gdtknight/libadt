@@ -36,7 +36,7 @@ void	push(t_stack *stack, void *data)
 		new_node->prev = stack->top;
 	}
 	stack->top = new_node;
-	new_node->cur_idx = stack->size++;
+	new_node->idx = stack->size++;
 }
 
 void	*pop(t_stack *stack)

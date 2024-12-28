@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 10:35:06 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/28 15:23:15 by yoshin           ###   ########.fr       */
+/*   Updated: 2024/12/28 16:08:31 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef int	t_flag;
 typedef struct s_node
 {
 	void			*data;
-	size_t			cur_idx;
+	size_t			idx;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
