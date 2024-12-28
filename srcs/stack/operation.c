@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:40:56 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/28 15:22:23 by yoshin           ###   ########.fr       */
+/*   Updated: 2024/12/28 16:10:06 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void	*pop(t_stack *stack)
 	}
 	top_node = stack->top;
 	data = top_node->data;
-	stack->size--;
 	stack->top = top_node->prev;
 	free(top_node);
 	top_node = NULL;
+	stack->size--;
 	if (empty(stack))
 		stack->bottom = (NULL);
-	if (!empty(stack))
+	else
 		stack->top->next = (NULL);
 	return (data);
 }
