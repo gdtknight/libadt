@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 12:17:13 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/27 16:33:43 by yoshin           ###   ########.fr       */
+/*   Updated: 2024/12/30 07:37:38 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ t_node	*create_new_node(void *data)
 	if (!new_node)
 		return (NULL);
 	new_node->data = data;
-	new_node->prev = NULL;
-	new_node->next = NULL;
+	new_node->prev = (NULL);
+	new_node->next = (NULL);
 	return (new_node);
 }
 
 void	release_node(t_node *node)
 {
-	node->next = NULL;
-	node->prev = NULL;
+	node->data = (NULL);
+	node->next = (NULL);
+	node->prev = (NULL);
 	free(node);
 	node = (NULL);
 }

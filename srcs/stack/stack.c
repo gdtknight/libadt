@@ -6,13 +6,13 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 10:35:22 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/28 14:12:43 by yoshin           ###   ########.fr       */
+/*   Updated: 2024/12/29 13:35:06 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libadt.h"
 
-t_stack	*create_new_stack(void)
+t_stack	*create_stack(void)
 {
 	t_stack	*new_stack;
 

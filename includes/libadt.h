@@ -72,15 +72,15 @@ typedef struct s_node
 /*  common/exception.c  */
 /* ******************** */
 
-t_flag	*get_adt_err_code(void);
-void	set_adt_err_code(t_flag err_code);
+t_flag		*get_adt_err_code(void);
+void		set_adt_err_code(t_flag err_code);
 
 /* ********************* */
 /*  common/node_utils.c  */
 /* ********************* */
 
-t_node	*create_new_node(void *data);
-void	release_node(t_node *node);
+t_node		*create_new_node(void *data);
+void		release_node(t_node *node);
 
 /* ---------------------------------------- */
 
@@ -97,20 +97,34 @@ typedef struct s_stack
 	size_t	size;
 }	t_stack;
 
-/* ********* */
-/*  stack.c  */
-/* ********* */
+/* *************** */
+/*  stack/stack.c  */
+/* *************** */
 
-t_stack	*create_new_stack(void);
-int		empty(t_stack *stack);
-void	clear_stack(t_stack *stack);
-void	release_stack(t_stack **stack);
+t_stack		*create_stack(void);
+int			empty(t_stack *stack);
+void		clear_stack(t_stack *stack);
+void		release_stack(t_stack **stack);
 
+/* ******************* */
+/*  stack/operation.c  */
+/* ******************* */
+
+void		push(t_stack *stack, void *data);
+void		*pop(t_stack *stack);
 /* ************* */
-/*  operation.c  */
+/*  hash/hash.c  */
 /* ************* */
 
-void	push(t_stack *stack, void *data);
-void	*pop(t_stack *stack);
+
+/* ****************** */
+/*  hash/operation.c  */
+/* ****************** */
+
+
+/* ****************** */
+/*  hash/utilities.c  */
+/* ****************** */
+
 
 #endif
