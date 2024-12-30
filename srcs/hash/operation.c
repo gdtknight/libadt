@@ -6,13 +6,13 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:47:03 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/30 07:46:58 by yoshin           ###   ########.fr       */
+/*   Updated: 2024/12/30 08:15:03 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libadt.h"
 
-void		put(t_hashtable *table, void *key, void *data)
+void	put(t_hashtable *table, void *key, void *data)
 {
 	size_t		idx;
 	t_record	*cur;
@@ -36,7 +36,7 @@ void		put(t_hashtable *table, void *key, void *data)
 	cur->value->data = data;
 }
 
-t_node		*get(t_hashtable *table, void *key, t_flag (*equal_key)(void *, void *))
+t_node	*get(t_hashtable *table, void *key, t_flag (*equal_key)(void *, void *))
 {
 	size_t		idx;
 	t_record	*cur;
@@ -52,7 +52,10 @@ t_node		*get(t_hashtable *table, void *key, t_flag (*equal_key)(void *, void *))
 	return (NULL);
 }
 
-void	delete(t_hashtable *table, void *key, t_flag (*equal_key)(void *, void *))
+void	delete(
+	t_hashtable *table,
+	void *key,
+	t_flag (*equal_key)(void *, void *))
 {
 	size_t		idx;
 	t_record	*prev;

@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 13:41:15 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/30 07:42:16 by yoshin           ###   ########.fr       */
+/*   Updated: 2024/12/30 08:15:13 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	hashcode(void	*key, size_t bucket_size)
 	return (idx);
 }
 
-t_record *create_new_record(void *key, void *data)
+t_record	*create_new_record(void *key, void *data)
 {
 	t_record	*record;
 	t_node		*value;
