@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 10:35:06 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/28 16:08:31 by yoshin           ###   ########.fr       */
+/*   Updated: 2024/12/30 07:42:28 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,19 +112,49 @@ void		release_stack(t_stack **stack);
 
 void		push(t_stack *stack, void *data);
 void		*pop(t_stack *stack);
+
+/* ---------------------------------------- */
+
+//////////////////////////////////////////////
+//                                          //
+//                  Hash                    //
+//                                          //
+//////////////////////////////////////////////
+
+typedef struct s_record
+{
+	void			*key;
+	t_node			*value;
+	struct s_record	*next;
+}	t_record;
+
+typedef struct s_hashtable
+{
+	t_record	**bucket;
+	size_t		size;
+}	t_hashtable;
+
 /* ************* */
 /*  hash/hash.c  */
 /* ************* */
 
+t_hashtable	*create_hashtable(size_t size);
+void		release_hashtable(t_hashtable **table);
 
 /* ****************** */
 /*  hash/operation.c  */
 /* ****************** */
 
+void		put(t_hashtable *table, void *key, void *data);
+t_node		*get(t_hashtable *table, void *key, t_flag (*equal_key)(void *, void *));
+void		delete(t_hashtable *table, void *key, t_flag (*equal_key)(void *, void *));
 
 /* ****************** */
 /*  hash/utilities.c  */
 /* ****************** */
 
+size_t		hashcode(void	*key, size_t bucket_size);
+t_record 	*create_new_record(void *key, void *data);
+void		delete_record(t_record **record);
 
 #endif
