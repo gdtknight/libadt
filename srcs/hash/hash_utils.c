@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 13:41:15 by yoshin            #+#    #+#             */
-/*   Updated: 2025/01/02 20:55:20 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/03 05:28:44 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,21 @@ t_record	*create_record(void *key, void *value)
 	return (record);
 }
 
-void	delete_record(t_record **record)
+void	delete_record(
+	t_record **record,
+	t_flag release_key,
+	t_flag release_value)
 {
 	if (!record || !*record)
 	{
 		set_adt_err_code(INVALID_PARAMETER);
 		return ;
 	}
-	free((*record)->key);
+	if (release_key)
+		free((*record)->key);
+	if (release_value)
+		free((*record)->value);
 	(*record)->key = (NULL);
-	release_node((*record)->value);
 	(*record)->value = (NULL);
 	(*record)->next = (NULL);
 	free(*record);

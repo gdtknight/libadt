@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:47:03 by yoshin            #+#    #+#             */
-/*   Updated: 2025/01/02 20:58:48 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/03 05:33:10 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ void	put(
 		}
 		cur = cur->next;
 	}
-	cur = create_record(key, value);
 	if (prev)
-		prev->next = cur;
+		prev->next = create_record(key, value);
+	else
+		(table->bucket)[table_idx] = create_record(key, value);
 }
 
 void	*get(t_hashtable *table, void *key, t_flag (*equal_key)(void *, void *))
@@ -59,6 +60,7 @@ void	*get(t_hashtable *table, void *key, t_flag (*equal_key)(void *, void *))
 void	delete(
 	t_hashtable *table,
 	void *key,
+	t_flag release_value,
 	t_flag (*equal_key)(void *, void *))
 {
 	size_t		idx;
@@ -76,7 +78,7 @@ void	delete(
 				(table->bucket)[idx] = cur->next;
 			else
 				prev->next = cur->next;
-			delete_record(&cur);
+			delete_record(&cur, FALSE, release_value);
 			return ;
 		}
 		prev = cur;

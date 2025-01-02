@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 08:45:16 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/30 07:46:32 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/03 05:30:45 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_hashtable	*create_hashtable(size_t size)
 	return (new_table);
 }
 
-void	release_hashtable(t_hashtable **table)
+void	release_hashtable(t_hashtable **table, t_flag release_key, t_flag release_value)
 {
 	size_t		idx;
 	t_record	*cur;
@@ -55,7 +55,7 @@ void	release_hashtable(t_hashtable **table)
 		while (cur)
 		{
 			next = cur->next;
-			delete_record(&cur);
+			delete_record(&cur, release_key, release_value);
 			cur = next;
 		}
 		((*table)->bucket)[idx - 1] = (NULL);

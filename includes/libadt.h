@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 10:35:06 by yoshin            #+#    #+#             */
-/*   Updated: 2025/01/02 20:56:40 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/03 05:47:10 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ typedef struct s_stack
 
 t_stack		*create_stack(void);
 int			empty(t_stack *stack);
-void		clear_stack(t_stack *stack);
-void		release_stack(t_stack **stack);
+void		clear_stack(t_stack *stack, t_flag release_data);
+void		release_stack(t_stack **stack, t_flag release_data);
 
 /* ************************************************************************** */
 /*                             stack/operation.c                              */
@@ -129,7 +129,10 @@ typedef struct s_hashtable
 /* ************************************************************************** */
 
 t_hashtable	*create_hashtable(size_t size);
-void		release_hashtable(t_hashtable **table);
+void		release_hashtable(
+				t_hashtable **table,
+				t_flag release_key,
+				t_flag release_value);
 
 /* ************************************************************************** */
 /*                            hash/operation.c                                */
@@ -149,6 +152,7 @@ void		*get(
 void		delete(
 				t_hashtable *table,
 				void *key,
+				t_flag release_value,
 				t_flag (*equal_key)(void *, void *));
 
 /* ************************************************************************** */
@@ -157,7 +161,10 @@ void		delete(
 
 size_t		hashcode(void *key, size_t bucket_size);
 t_record	*create_record(void *key, void *data);
-void		delete_record(t_record **record);
+void		delete_record(
+				t_record **record,
+				t_flag release_key,
+				t_flag release_value);
 
 /* -------------------------------------------------------------------------- */
 
