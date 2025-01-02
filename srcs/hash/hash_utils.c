@@ -35,7 +35,7 @@ t_record	*create_new_record(void *key, void *data)
 	record = (t_record *) malloc(sizeof(t_record));
 	if (!record)
 		return (NULL);
-	value = create_new_node(data);
+	value = create_node(data);
 	if (!value)
 	{
 		free(record);

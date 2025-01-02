@@ -79,7 +79,7 @@ void		set_adt_err_code(t_flag err_code);
 /*  common/node_utils.c  */
 /* ********************* */
 
-t_node		*create_new_node(void *data);
+t_node		*create_node(void *data);
 void		release_node(t_node *node);
 
 /* ---------------------------------------- */

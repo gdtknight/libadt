@@ -6,13 +6,13 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 12:17:13 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/30 07:37:38 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/02 17:23:11 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libadt.h"
 
-t_node	*create_new_node(void *data)
+t_node	*create_node(void *data)
 {
 	t_node	*new_node;
 

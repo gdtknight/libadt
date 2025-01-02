@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 17:40:56 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/28 16:10:06 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/02 20:11:56 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	push(t_stack *stack, void *data)
 		set_adt_err_code(INVALID_PARAMETER);
 		return ;
 	}
-	new_node = create_new_node(data);
+	new_node = create_node(data);
 	if (!new_node)
 	{
 		set_adt_err_code(MALLOC_FAIL);
