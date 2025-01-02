@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 13:00:08 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/28 14:11:00 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/02 17:23:56 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,5 @@ t_flag	*get_adt_err_code(void)
 
 void	set_adt_err_code(int err_code)
 {
-	t_flag	*stack_err_code;
-
-	stack_err_code = get_adt_err_code();
-	*stack_err_code = err_code;
+	(*get_adt_err_code()) = err_code;
 }
