@@ -103,16 +103,18 @@ void		*pop(t_stack *stack);
 t_node		*create_node(void *data);
 void		release_node(t_node *node);
 
-//////////////////////////////////////////////
-//                                          //
-//                  Hash                    //
-//                                          //
-//////////////////////////////////////////////
+/* -------------------------------------------------------------------------- */
+
+/* ////////////////////////////////////////////////////////////////////////// */
+/* //                                                                      // */
+/* //                                Hash                                  // */
+/* //                                                                      // */
+/* ////////////////////////////////////////////////////////////////////////// */
 
 typedef struct s_record
 {
 	void			*key;
-	t_node			*value;
+	void			*value;
 	struct s_record	*next;
 }	t_record;
 
@@ -122,33 +124,41 @@ typedef struct s_hashtable
 	size_t		size;
 }	t_hashtable;
 
-/* ************* */
-/*  hash/hash.c  */
-/* ************* */
+/* ************************************************************************** */
+/*                               hash/hash.c                                  */
+/* ************************************************************************** */
 
 t_hashtable	*create_hashtable(size_t size);
 void		release_hashtable(t_hashtable **table);
 
-/* ****************** */
-/*  hash/operation.c  */
-/* ****************** */
+/* ************************************************************************** */
+/*                            hash/operation.c                                */
+/* ************************************************************************** */
 
-void		put(t_hashtable *table, void *key, void *data);
-t_node		*get(
+void		put(
+				t_hashtable *table,
+				void *key,
+				void *value,
+				t_flag (*equal_key)(void *, void *));
+
+void		*get(
 				t_hashtable *table,
 				void *key,
 				t_flag (*equal_key)(void *, void *));
+
 void		delete(
 				t_hashtable *table,
 				void *key,
 				t_flag (*equal_key)(void *, void *));
 
-/* ****************** */
-/*  hash/utilities.c  */
-/* ****************** */
+/* ************************************************************************** */
+/*                            hash/utilities.c                                */
+/* ************************************************************************** */
 
-size_t		hashcode(void	*key, size_t bucket_size);
-t_record	*create_new_record(void *key, void *data);
+size_t		hashcode(void *key, size_t bucket_size);
+t_record	*create_record(void *key, void *data);
 void		delete_record(t_record **record);
+
+/* -------------------------------------------------------------------------- */
 
 #endif

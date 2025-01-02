@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 13:41:15 by yoshin            #+#    #+#             */
-/*   Updated: 2025/01/02 17:23:06 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/02 20:55:20 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,13 @@ size_t	hashcode(void	*key, size_t bucket_size)
 	return (idx);
 }
 
-t_record	*create_new_record(void *key, void *data)
+t_record	*create_record(void *key, void *value)
 {
 	t_record	*record;
-	t_node		*value;
 
 	record = (t_record *) malloc(sizeof(t_record));
 	if (!record)
 		return (NULL);
-	value = create_node(data);
-	if (!value)
-	{
-		free(record);
-		return (NULL);
-	}
 	record->key = key;
 	record->value = value;
 	record->next = (NULL);

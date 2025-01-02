@@ -6,37 +6,41 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:47:03 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/30 08:15:03 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/02 20:58:48 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libadt.h"
 
-void	put(t_hashtable *table, void *key, void *data)
+void	put(
+			t_hashtable *table,
+			void *key,
+			void *value,
+			t_flag (*equal_key)(void *, void *))
 {
-	size_t		idx;
+	size_t		table_idx;
 	t_record	*cur;
 	t_record	*prev;
 
-	idx = hashcode(key, table->size);
+	table_idx = hashcode(key, table->size);
 	prev = (NULL);
-	cur = (table->bucket)[idx];
+	cur = (table->bucket)[table_idx];
 	while (cur)
 	{
 		prev = cur;
+		if (equal_key(key, cur->key))
+		{
+			cur->value = value;
+			return ;
+		}
 		cur = cur->next;
 	}
-	if (!cur)
-	{
-		cur = create_new_record(key, data);
-		if (prev)
-			prev->next = cur;
-		return ;
-	}
-	cur->value->data = data;
+	cur = create_record(key, value);
+	if (prev)
+		prev->next = cur;
 }
 
-t_node	*get(t_hashtable *table, void *key, t_flag (*equal_key)(void *, void *))
+void	*get(t_hashtable *table, void *key, t_flag (*equal_key)(void *, void *))
 {
 	size_t		idx;
 	t_record	*cur;
