@@ -6,7 +6,7 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 13:41:15 by yoshin            #+#    #+#             */
-/*   Updated: 2024/12/30 08:15:13 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/02 17:23:06 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ void	delete_record(t_record **record)
 		set_adt_err_code(INVALID_PARAMETER);
 		return ;
 	}
-	release_node((*record)->value);
+	free((*record)->key);
 	(*record)->key = (NULL);
+	release_node((*record)->value);
 	(*record)->value = (NULL);
 	(*record)->next = (NULL);
 	free(*record);
