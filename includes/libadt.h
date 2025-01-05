@@ -3,141 +3,113 @@
 /*                                                        :::      ::::::::   */
 /*   libadt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yoshin <yoshin@student.42gyeongsan.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/27 10:35:06 by yoshin            #+#    #+#             */
-/*   Updated: 2025/01/03 05:47:10 by yoshin           ###   ########.fr       */
+/*   Created: 2025/01/05 18:19:49 by yoshin            #+#    #+#             */
+/*   Updated: 2025/01/06 02:15:19 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/**
+ * @file libadt.h
+ * @brief Header file for Abstract Data Type (ADT) library.
+ *
+ * Provides common definitions, error handling, and interfaces for stack
+ * and hash table data structures.
+ */
 
 #ifndef LIBADT_H
 # define LIBADT_H
 
 # include <unistd.h>
 # include <stdlib.h>
+# include "common.h"
+# include "common_err.h"
 
-/* ////////////////////////////////////////////////////////////////////////// */
-/* //                                                                      // */
-/* //                         Common Definitions                           // */
-/* //                                                                      // */
-/* ////////////////////////////////////////////////////////////////////////// */
-
-# ifndef COMMON_DEF
-
-#  define COMMON_DEF
-
-#  define TRUE (1)
-#  define FALSE (0)
-
-#  define SUCCESS (1)
-#  define FAIL (0)
-
-typedef int	t_flag;
-
-# endif
-
-/* ////////////////////////////////////////////////////////////////////////// */
-/* //                                                                      // */
-/* //                          Error / Exception                           // */
-/* //                                                                      // */
-/* ////////////////////////////////////////////////////////////////////////// */
+/** @defgroup Exceptions Error and Exception Handling
+ *  @brief Error codes and utilities for error handling in ADT.
+ *  @{
+ */
 
 # ifndef ADT_EXCEPTION_DEF
-
 #  define ADT_EXCEPTION_DEF
 
-#  define INVALID_PARAMETER (-1)
-#  define MALLOC_FAIL (-1)
-#  define EMPTY_STACK (-1)
+typedef enum e_adt_err_code {
+	EMPTY_STACK = -1,
+	EMPTY_TABLE,
+}	t_adt_err_code;
 
-# endif
+t_adt_err_code	*get_adt_err_code(void);
+void			set_adt_err_code(t_adt_err_code err_code);
 
-/* ************************************************************************** */
-/*                           common/adt_exception.c                           */
-/* ************************************************************************** */
+# endif /* ADT_EXCEPTION_DEF */
 
-t_flag		*get_adt_err_code(void);
-void		set_adt_err_code(t_flag err_code);
+/** @} */ // End of Exceptions
 
-/* ////////////////////////////////////////////////////////////////////////// */
-/* //                                                                      // */
-/* //                                Stack                                 // */
-/* //                                                                      // */
-/* ////////////////////////////////////////////////////////////////////////// */
+/** @defgroup Stack Stack Data Structure
+ *  @brief Interface and utilities for stack implementation.
+ *  @{
+ */
 
-typedef struct s_node
-{
+/* Stack Definitions */
+typedef struct s_node {
 	size_t			idx;
 	void			*data;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
 
-typedef struct s_stack
-{
+typedef struct s_stack {
 	t_node	*top;
 	t_node	*bottom;
 	size_t	size;
 }	t_stack;
 
-/* ************************************************************************** */
-/*                               stack/stack.c                                */
-/* ************************************************************************** */
-
+/* Stack Managing Function Prototypes */
 t_stack		*create_stack(void);
-int			empty(t_stack *stack);
+int			is_empty(t_stack *stack);
 void		clear_stack(t_stack *stack, t_flag release_data);
 void		release_stack(t_stack **stack, t_flag release_data);
 
-/* ************************************************************************** */
-/*                             stack/operation.c                              */
-/* ************************************************************************** */
-
+/* Stack Operation Function Prototypes */
 void		push(t_stack *stack, void *data);
 void		*pop(t_stack *stack);
+void		push_node(t_stack *stack, t_node *node);
+t_node		*pop_node(t_stack *stack);
 
-/* ************************************************************************** */
-/*                           common/stack_utils.c                             */
-/* ************************************************************************** */
-
+/* Stack Utility Function Prototypes */
 t_node		*create_node(void *data);
 void		release_node(t_node *node);
 
-/* -------------------------------------------------------------------------- */
+/** @} */ // End of Stack
 
-/* ////////////////////////////////////////////////////////////////////////// */
-/* //                                                                      // */
-/* //                                Hash                                  // */
-/* //                                                                      // */
-/* ////////////////////////////////////////////////////////////////////////// */
+/** @defgroup HashTable Hash Table Data Structure
+ *  @brief Interface and utilities for hash table implementation.
+ *  @{
+ */
 
-typedef struct s_record
-{
+/* Hash Table Definitions */
+typedef struct s_record {
 	void			*key;
 	void			*value;
 	struct s_record	*next;
 }	t_record;
 
-typedef struct s_hashtable
-{
+typedef struct s_hashtable {
 	t_record	**bucket;
 	size_t		size;
 }	t_hashtable;
 
-/* ************************************************************************** */
-/*                               hash/hash.c                                  */
-/* ************************************************************************** */
+/* Hash Table Managing Function Prototypes */
+t_hashtable	*create_hashtable(
+				size_t size);
 
-t_hashtable	*create_hashtable(size_t size);
 void		release_hashtable(
 				t_hashtable **table,
 				t_flag release_key,
 				t_flag release_value);
 
-/* ************************************************************************** */
-/*                            hash/operation.c                                */
-/* ************************************************************************** */
-
+/* Hash Table Operation Function Prototypes */
 void		put(
 				t_hashtable *table,
 				void *key,
@@ -155,17 +127,20 @@ void		delete(
 				t_flag release_value,
 				t_flag (*equal_key)(void *, void *));
 
-/* ************************************************************************** */
-/*                            hash/utilities.c                                */
-/* ************************************************************************** */
+/* Hash Table Utility Function Prototypes */
+size_t		hashcode(
+				void *key,
+				size_t bucket_size);
 
-size_t		hashcode(void *key, size_t bucket_size);
-t_record	*create_record(void *key, void *data);
+t_record	*create_record(
+				void *key,
+				void *data);
+
 void		delete_record(
 				t_record **record,
 				t_flag release_key,
 				t_flag release_value);
 
-/* -------------------------------------------------------------------------- */
+/** @} */ // End of HashTable
 
 #endif

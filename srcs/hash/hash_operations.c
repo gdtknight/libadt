@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operation.c                                        :+:      :+:    :+:   */
+/*   hash_operations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 14:47:03 by yoshin            #+#    #+#             */
-/*   Updated: 2025/01/03 05:33:10 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/06 01:08:00 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	delete(
 				(table->bucket)[idx] = cur->next;
 			else
 				prev->next = cur->next;
-			delete_record(&cur, FALSE, release_value);
+			delete_record(&cur, OFF, release_value);
 			return ;
 		}
 		prev = cur;

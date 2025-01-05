@@ -6,10 +6,11 @@
 /*   By: yoshin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 13:41:15 by yoshin            #+#    #+#             */
-/*   Updated: 2025/01/03 05:28:44 by yoshin           ###   ########.fr       */
+/*   Updated: 2025/01/06 01:06:58 by yoshin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "common_err.h"
 #include "libadt.h"
 
 size_t	hashcode(void	*key, size_t bucket_size)
@@ -47,7 +48,7 @@ void	delete_record(
 {
 	if (!record || !*record)
 	{
-		set_adt_err_code(INVALID_PARAMETER);
+		set_common_err_code(INVALID_PARAMS);
 		return ;
 	}
 	if (release_key)
